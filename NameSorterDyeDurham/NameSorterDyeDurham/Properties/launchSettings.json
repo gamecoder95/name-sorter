@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NameSorterDyeDurham": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\admin\\Documents\\Projects\\name-sorter\\NameSorterDyeDurham\\NameSorterDyeDurham\\res\\unsorted-names-list.txt"
+    }
+  }
+}

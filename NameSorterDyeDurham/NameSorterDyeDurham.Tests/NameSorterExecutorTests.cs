@@ -7,29 +7,36 @@ namespace NameSorterDyeDurham.Tests
     [TestFixture]
     public class NameSorterExecutorTests
     {
-        private const string INPUT_FILE_NAME = "./res/test_input_file.txt";
-        private const string INPUT_SMALL_FILE_NAME = "./res/test_input_file_small.txt";
+        private readonly string INPUT_FILE_NAME = $"{Directory.GetCurrentDirectory()}/res/test_input_file.txt";
+        private readonly string INPUT_SMALL_FILE_NAME = $"{Directory.GetCurrentDirectory()}/res/test_input_file_small.txt";
 
-        private NameSorterExecutor _executor = new NameSorterExecutor();
+        private readonly string OUTPUT_FILENAME = $"{Directory.GetCurrentDirectory()}/res/output_file.txt";
+        private NameSorterExecutor _executor;
+
+        [SetUp]
+        public void Setup()
+        {
+            _executor = new NameSorterExecutor(OUTPUT_FILENAME);
+        }
 
         [Test]
         public void Given_InputFileOfNames_When_ExecuteForInputFile_Then_OutputFileIsProduced()
         {
             _executor.ExecuteForInputFile(INPUT_FILE_NAME);
 
-            Assert.That(File.Exists(NameSorterExecutor.OUTPUT_FILENAME), Is.True);
+            Assert.That(File.Exists(OUTPUT_FILENAME), Is.True);
         }
 
         [Test]
         public void Given_InputFileOfNames_When_ExecuteForInputFileTwiceInSuccession_Then_OutputFileIsOverwrittenSecondTime()
         {
             _executor.ExecuteForInputFile(INPUT_FILE_NAME);
-            int numLinesFirstExec = File.ReadAllLines(NameSorterExecutor.OUTPUT_FILENAME).Length;
+            int numLinesFirstExec = File.ReadAllLines(OUTPUT_FILENAME).Length;
 
             _executor.ExecuteForInputFile(INPUT_SMALL_FILE_NAME);
-            int numLinesSecondExec = File.ReadAllLines(NameSorterExecutor.OUTPUT_FILENAME).Length;
+            int numLinesSecondExec = File.ReadAllLines(OUTPUT_FILENAME).Length;
 
-            Assert.That(File.Exists(NameSorterExecutor.OUTPUT_FILENAME), Is.True);
+            Assert.That(File.Exists(OUTPUT_FILENAME), Is.True);
             Assert.That(numLinesSecondExec, Is.Not.EqualTo(numLinesFirstExec));
         }
 

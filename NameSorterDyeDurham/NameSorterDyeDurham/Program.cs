@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string outputFilename = $"{Directory.GetCurrentDirectory()}/sorted-names-list.txt";
+            var executor = new NameSorterExecutor(outputFilename);
+            executor.ExecuteForInputFile(args[0]);
         }
     }
 }

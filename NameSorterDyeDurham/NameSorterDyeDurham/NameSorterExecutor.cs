@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
+using System.Xml.Linq;
 
 namespace NameSorterDyeDurham
 {
     public class NameSorterExecutor
     {
-        public const string OUTPUT_FILENAME = "./sorted-names-list.txt";
+        public readonly string _outputFilename;
 
-        private readonly NameSorter _nameSorter = new NameSorter();
+        private readonly NameSorter _nameSorter;
+
+        public NameSorterExecutor(string outputFilename) 
+        {
+            _nameSorter = new NameSorter();
+            _outputFilename = outputFilename;
+        }
 
         public void ExecuteForInputFile(string inputFilename)
-        {
+        {   
             if (!File.Exists(inputFilename))
             {
                 throw new ArgumentException($"Error: input file {inputFilename} does not exist!");
@@ -22,7 +29,8 @@ namespace NameSorterDyeDurham
 
             var sortedNames = _nameSorter.SortNames(unsortedNames);
 
-            using (StreamWriter sw = File.CreateText(OUTPUT_FILENAME))
+            Console.WriteLine($"Output written to: {_outputFilename}");
+            using (StreamWriter sw = File.CreateText(_outputFilename))
             {
                 foreach (var name in sortedNames)
                 {

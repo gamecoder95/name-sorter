@@ -8,7 +8,7 @@ namespace NameSorterDyeDurham
     {
         public List<string> SortNames(string[] unsortedNames)
         {
-            return new List<string>();
+            return new List<string>(unsortedNames);
         }
     }
 }

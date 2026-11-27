@@ -23,4 +23,13 @@
     <ProjectReference Include="..\NameSorterDyeDurham\NameSorterDyeDurham.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="res\test_input_file.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\test_input_file_small.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
