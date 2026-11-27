@@ -96,4 +96,29 @@ public class NameSorterTests
 
         Assert.That(sortedNames, Is.EqualTo(expectedSortedNames).AsCollection);
     }
+
+    [Test]
+    public void Given_ListOfNamesWithSameLastAndMiddleNamesAndDifferentLengths_When_SortNames_Then_ReturnListOfNamesSortedPreferringLongerNamesFirst()
+    {
+        string[] unsortedNames =
+        [
+            "Muhammad Hammaad Mahmoud Ahmad",
+            "Ayyoub Mahmoud Ahmad",
+            "Mahmoud Ahmad",
+            "Zaynab Mahmoud Ahmad",
+            "Omar Ahmad"
+        ];
+        var expectedSortedNames = new List<string>()
+        {
+            "Muhammad Hammaad Mahmoud Ahmad",
+            "Ayyoub Mahmoud Ahmad",
+            "Zaynab Mahmoud Ahmad",
+            "Mahmoud Ahmad",
+            "Omar Ahmad"
+        };
+
+        var sortedNames = _nameSorter.SortNames(unsortedNames);
+
+        Assert.That(sortedNames, Is.EqualTo(expectedSortedNames).AsCollection);
+    }
 }
