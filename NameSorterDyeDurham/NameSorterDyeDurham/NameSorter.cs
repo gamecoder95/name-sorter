@@ -8,25 +8,25 @@ namespace NameSorterDyeDurham
     {
         public List<string> SortNames(string[] unsortedNames)
         {
-            var sortedList = new List<string>(unsortedNames);
-
-            if (sortedList.Count > 1)
+            if (unsortedNames.Length <= 1)
             {
-                sortedList.Sort(CompareNames);
+                return [.. unsortedNames];
             }
 
-            return sortedList;
+            // Splitting the names here before sorting saves us from having to split the names on every comparison
+            List<string[]> splitNamesSortedList = [.. unsortedNames.Select(name => name.Split(' '))];
+
+            splitNamesSortedList.Sort(CompareNames);
+
+            return [.. splitNamesSortedList.Select(splitName => string.Join(" ", splitName))];
         }
 
-        private int CompareNames(string name1, string name2)
+        private int CompareNames(string[] name1Split, string[] name2Split)
         {
             // We compare names from last name to first name, stopping at the first comparison that's unequal
             // In the case that last name and given names are equal between two full names:
             //  - In the case that both full names have the same number of given names, we simply compare up to the first name, defaulting to the result of that comparison.
             //  - In the case that the full names differ in the number of given names, preference is given to the longer name.
-
-            string[] name1Split = name1.Split(' ');
-            string[] name2Split = name2.Split(' ');
 
             // In the case that they are equal, longerName = name1, and shorterName = name2, so regular comparison ensues.
             var longerName = name1Split.Length >= name2Split.Length ? name1Split : name2Split;
