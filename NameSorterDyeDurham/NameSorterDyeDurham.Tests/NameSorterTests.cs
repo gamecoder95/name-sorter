@@ -7,13 +7,6 @@ public class NameSorterTests
 {
     private readonly NameSorter _nameSorter = new NameSorter();
 
-
-    [SetUp]
-    public void Setup()
-    {
-
-    }
-
     [Test]
     public void Given_EmptyListOfNames_When_SortNames_Then_ReturnEmptyListOfNames()
     {
